@@ -1,18 +1,26 @@
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom, rgba(255, 255, 0, 0.2), rgba(255, 136, 0, 0.2), rgba(255, 0, 0, 0.2), rgba(139, 69, 19, 0.2), rgba(0, 0, 0, 0.2));
-
-
-
+  
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 0, 0.2),
+    rgba(255, 136, 0, 0.2),
+    rgba(255, 0, 0, 0.2),
+    rgba(139, 69, 19, 0.2),
+    rgba(0, 0, 0, 0.2)
+  );
+  background-repeat: no-repeat;
 }
-
+.search-form {
+  text-align: center;
+}
 input {
   padding: 10px; /* Wielkość wewnętrznego marginesu dla elementu input */
   border: 1px solid #ccc; /* Grubość i styl obramowania */
   border-radius: 5px; /* Zaokrąglenie rogów */
-  font-size: 16px; /* Rozmiar czcionki */
-  width: 100%;
+  font-size: 20px; /* Rozmiar czcionki */
+  /* width: 100%; */
 }
 
 .search-btn {
@@ -34,13 +42,11 @@ input {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Efekt cienia po aktywowaniu */
 }
 
-
 input:focus {
   outline: none; /* Usunięcie domyślnego podświetlenia w momencie aktywacji elementu */
   border-color: #007bff; /* Kolor obramowania po aktywowaniu */
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Efekt cienia po aktywowaniu */
 }
-
 
 /* .gallery{
   display: flex;
@@ -50,43 +56,35 @@ input:focus {
 } */
 
 .gallery {
- 
-
   display: flex;
   flex-wrap: wrap;
-  
+
   gap: 20px; /* Wielkość odstępu między elementami galerii */
 }
 
 .photo-card {
-  position: relative; 
-   border: 2px solid #ccc; /* Grubość i styl obramowania */
- 
-  
+  position: relative;
+  border: 2px solid white; /* Grubość i styl obramowania */
+
   height: auto; /* Zachowanie proporcji wysokości */
-  margin-top: 50px ;
+  margin-top: 50px;
   margin-bottom: 25px;
-  
 }
 
 .photo-card img {
   width: 100%; /* Szerokość obrazka na 100% */
   /* height: auto; Zachowanie proporcji wysokości */
- height: auto;
+  height: auto;
   object-fit: cover; /* Dopasowanie obrazka do kontenera, zachowując proporcje */
 }
 
-
-
-
 .info {
-  
   width: 100%;
   font-size: 8px;
-   display: flex;
-   gap: 10px;
-   /* align-items: center; */
-   flex-direction: row;
+  display: flex;
+  gap: 10px;
+  /* align-items: center; */
+  flex-direction: row;
   position: absolute; /* Ustawienie pozycji absolutnej */
   top: 100%; /* Odległość od dolnej krawędzi elementu nadrzędnego */
   left: 0px; /* Odległość od lewej krawędzi elementu nadrzędnego */
@@ -96,7 +94,6 @@ input:focus {
 }
 
 .info-item {
- 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -105,7 +102,7 @@ input:focus {
 
 .load-more {
   margin-top: 100px;
-   padding: 10px 15px; /* Wielkość wewnętrznego marginesu dla przycisku */
+  padding: 10px 15px; /* Wielkość wewnętrznego marginesu dla przycisku */
   border: none; /* Usunięcie obramowania */
   border-radius: 5px; /* Zaokrąglenie rogów */
   background-color: #007bff; /* Kolor tła przycisku */

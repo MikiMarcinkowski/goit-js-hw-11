@@ -24,6 +24,8 @@ const gallery = document.querySelector('.gallery');
 const searchBtn = document.querySelector('[type="submit"]');
 const input = document.querySelector('[name="searchQuery"]');
 const loadMoreBtn = document.querySelector('.load-more');
+const body = document.querySelector('body');
+
 
 let cardPage = null;
 let totalHits = null;
@@ -47,13 +49,13 @@ function onClickSearch(event) {
     }
 
     gallery.innerHTML = createGalleryCards(cardData);
-    gallery.style.marginTop = '60px';
+
     lightbox.refresh();
 
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    // window.scrollTo({
+    //   top: 0,
+    //   behavior: 'smooth',
+    // });
 
     Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
     loadMoreBtn.style.display = 'block';
@@ -68,7 +70,7 @@ function onClickSearch(event) {
 }
 searchBtn.addEventListener('click', onClickSearch);
 
-function onClickLoadMore(e) {
+function onClickLoadMore() {
   cardPage += 1;
 
   getCard().then(cardData => {
@@ -77,6 +79,7 @@ function onClickLoadMore(e) {
 
     const { height: cardHeight } =
       gallery.firstElementChild.getBoundingClientRect();
+    
     window.scrollBy({
       top: cardHeight * 2,
       behavior: 'smooth',
@@ -116,4 +119,22 @@ async function getCard() {
   } catch (error) {
     console.error(error);
   }
-}
+};
+
+window.addEventListener('scroll', handleScroll);
+
+  function handleScroll() {
+    // Jeśli użytkownik przewinął do końca strony
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      onClickLoadMore();
+      // Tutaj można wykonać żądanie AJAX lub inny sposób ładowania nowych zawartości
+      // Na przykład:
+      // fetch('url-do-danych-nowej-zawartosci')
+      //   .then(response => response.json())
+      //   .then(data => {
+      //     // Przetwarzanie danych i dodawanie ich do istniejącego kontenera
+      //   });
+    }
+  }
+
+  

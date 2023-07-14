@@ -4,7 +4,22 @@ import axios from 'axios';
 import Notiflix from 'notiflix';
 import simpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { createGalleryCards } from './js/gallery';
+
+
+const createGalleryCards = (cardInfo) => {
+  const imgCards = cardInfo.map(cardData => {
+    return `<div class="photo-card">
+        <a href="${cardData.largeImageURL}"><img src="${cardData.webformatURL}" alt="${cardData.tags}" loading="lazy" /></a>
+        <div class="info">
+            <p class="info-item"><b>Likes</b>${cardData.likes}</p>
+            <p class="info-item"><b>Views</b>${cardData.views}</p>
+            <p class="info-item"><b>Comments</b>${cardData.comments}</p>
+            <p class="info-item"><b>Downloads</b>${cardData.downloads}</p>
+        </div>
+        </div> `;
+  });
+  return imgCards.join('');
+}
 
 const input = document.querySelector('[name="searchQuery"]');
 const searchBtn = document.querySelector('[type="submit"]');
@@ -60,7 +75,8 @@ searchBtn.addEventListener('click', onBtnSearch);
 function onLoadMoreCards(e) {
   cardPage += 1;
 
-  getCard().then(cardData => {
+  getCard()
+    .then(cardData => {
     gallery.insertAdjacentHTML('beforeend', createGalleryCards(cardData));
     lightbox.refresh();
 

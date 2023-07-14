@@ -5,8 +5,7 @@ import Notiflix from 'notiflix';
 import simpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-
-const createGalleryCards = (cardInfo) => {
+const createGalleryCards = cardInfo => {
   const imgCards = cardInfo.map(cardData => {
     return `<div class="photo-card">
         <a href="${cardData.largeImageURL}"><img src="${cardData.webformatURL}" alt="${cardData.tags}" loading="lazy" /></a>
@@ -19,22 +18,21 @@ const createGalleryCards = (cardInfo) => {
         </div> `;
   });
   return imgCards.join('');
-}
+};
 
-const input = document.querySelector('[name="searchQuery"]');
-const searchBtn = document.querySelector('[type="submit"]');
 const gallery = document.querySelector('.gallery');
+const searchBtn = document.querySelector('[type="submit"]');
+const input = document.querySelector('[name="searchQuery"]');
 const loadMoreBtn = document.querySelector('.load-more');
-const body = document.querySelector('body');
-
 
 let cardPage = null;
 let totalHits = null;
 let searchValue = null;
+loadMoreBtn.style.display = 'none';
 
 const lightbox = new simpleLightbox('.gallery a');
 
-function onBtnSearch(event) {
+function onClickSearch(event) {
   event.preventDefault();
   if (input.value.trim() === '') {
     return;
@@ -45,7 +43,7 @@ function onBtnSearch(event) {
   getCard().then(cardData => {
     if (!cardData) {
       gallery.innerHTML = '';
-      loadMoreBtn.style.display = 'none';
+      // loadMoreBtn.style.display = 'none';
     }
 
     gallery.innerHTML = createGalleryCards(cardData);
@@ -60,8 +58,6 @@ function onBtnSearch(event) {
     Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
     loadMoreBtn.style.display = 'block';
 
-   
-
     if (totalHits <= 40) {
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
@@ -70,13 +66,12 @@ function onBtnSearch(event) {
     }
   });
 }
-searchBtn.addEventListener('click', onBtnSearch);
+searchBtn.addEventListener('click', onClickSearch);
 
-function onLoadMoreCards(e) {
+function onClickLoadMore(e) {
   cardPage += 1;
 
-  getCard()
-    .then(cardData => {
+  getCard().then(cardData => {
     gallery.insertAdjacentHTML('beforeend', createGalleryCards(cardData));
     lightbox.refresh();
 
@@ -95,7 +90,7 @@ function onLoadMoreCards(e) {
     }
   });
 }
-loadMoreBtn.addEventListener('click', onLoadMoreCards);
+loadMoreBtn.addEventListener('click', onClickLoadMore);
 
 async function getCard() {
   try {
@@ -122,5 +117,3 @@ async function getCard() {
     console.error(error);
   }
 }
-
-

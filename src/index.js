@@ -5,15 +5,15 @@ import Notiflix from 'notiflix';
 import simpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-const createGalleryCards = cardInfo => {
-  const imgCards = cardInfo.map(cardData => {
+const createGalleryItems = itemInfo => {
+  const imgCards = itemInfo.map(itemData => {
     return `<div class="photo-card">
-        <a href="${cardData.largeImageURL}"><img src="${cardData.webformatURL}" alt="${cardData.tags}" loading="lazy" /></a>
+        <a href="${itemData.largeImageURL}"><img src="${itemData.webformatURL}" alt="${itemData.tags}" loading="lazy" /></a>
         <div class="info">
-            <p class="info-item"><b>Likes</b>${cardData.likes}</p>
-            <p class="info-item"><b>Views</b>${cardData.views}</p>
-            <p class="info-item"><b>Comments</b>${cardData.comments}</p>
-            <p class="info-item"><b>Downloads</b>${cardData.downloads}</p>
+            <p class="info-item"><b>Likes</b>${itemData.likes}</p>
+            <p class="info-item"><b>Views</b>${itemData.views}</p>
+            <p class="info-item"><b>Comments</b>${itemData.comments}</p>
+            <p class="info-item"><b>Downloads</b>${itemData.downloads}</p>
         </div>
         </div> `;
   });
@@ -42,13 +42,13 @@ const onClickSearch = (event) => {
 
   page = 1;
   searchValue = input.value;
-  getCard().then(cardData => {
-    if (!cardData) {
+  getGalleryItem().then(itemData => {
+    if (!itemData) {
       gallery.innerHTML = '';
       
     }
 
-    gallery.innerHTML = createGalleryCards(cardData);
+    gallery.innerHTML = createGalleryItems(itemData);
 
     lightbox.refresh();
 
@@ -70,8 +70,8 @@ searchBtn.addEventListener('click', onClickSearch);
 const onClickLoadMore = () => {
   page += 1;
 
-  getCard().then(cardData => {
-    gallery.insertAdjacentHTML('beforeend', createGalleryCards(cardData));
+  getGalleryItem().then(itemData => {
+    gallery.insertAdjacentHTML('beforeend', createGalleryItems(itemData));
     lightbox.refresh();
 
     const { height: cardHeight } =
@@ -92,7 +92,7 @@ const onClickLoadMore = () => {
 }
 loadMoreBtn.addEventListener('click', onClickLoadMore);
 
-const getCard = async () => {
+const getGalleryItem = async () => {
   try {
     const response = await axios.get('https://pixabay.com/api/', {
       params: {
@@ -105,14 +105,14 @@ const getCard = async () => {
         per_page: 40,
       },
     });
-    const cardData = response.data.hits;
+    const itemData = response.data.hits;
     totalHits = response.data.totalHits;
-    if (cardData.length === 0) {
+    if (itemData.length === 0) {
       return Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
     }
-    return cardData;
+    return itemData;
   } catch (error) {
     console.error(error);
   }

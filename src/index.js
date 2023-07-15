@@ -27,35 +27,32 @@ const loadMoreBtn = document.querySelector('.load-more');
 const body = document.querySelector('body');
 
 
-let cardPage = null;
+let page = null;
 let totalHits = null;
 let searchValue = null;
 loadMoreBtn.style.display = 'none';
 
 const lightbox = new simpleLightbox('.gallery a');
 
-function onClickSearch(event) {
+const onClickSearch = (event) => {
   event.preventDefault();
   if (input.value.trim() === '') {
     return;
   }
 
-  cardPage = 1;
+  page = 1;
   searchValue = input.value;
   getCard().then(cardData => {
     if (!cardData) {
       gallery.innerHTML = '';
-      // loadMoreBtn.style.display = 'none';
+      
     }
 
     gallery.innerHTML = createGalleryCards(cardData);
 
     lightbox.refresh();
 
-    // window.scrollTo({
-    //   top: 0,
-    //   behavior: 'smooth',
-    // });
+  
 
     Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
     loadMoreBtn.style.display = 'block';
@@ -70,8 +67,8 @@ function onClickSearch(event) {
 }
 searchBtn.addEventListener('click', onClickSearch);
 
-function onClickLoadMore() {
-  cardPage += 1;
+const onClickLoadMore = () => {
+  page += 1;
 
   getCard().then(cardData => {
     gallery.insertAdjacentHTML('beforeend', createGalleryCards(cardData));
@@ -85,7 +82,7 @@ function onClickLoadMore() {
       behavior: 'smooth',
     });
 
-    if (cardPage === Math.ceil(totalHits / 40)) {
+    if (page === Math.ceil(totalHits / 40)) {
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
       );
@@ -95,7 +92,7 @@ function onClickLoadMore() {
 }
 loadMoreBtn.addEventListener('click', onClickLoadMore);
 
-async function getCard() {
+const getCard = async () => {
   try {
     const response = await axios.get('https://pixabay.com/api/', {
       params: {
@@ -104,7 +101,7 @@ async function getCard() {
         image_type: 'photo',
         orientation: 'horizontal',
         safesearch: 'true',
-        page: `${cardPage}`,
+        page: `${page}`,
         per_page: 40,
       },
     });
@@ -121,20 +118,21 @@ async function getCard() {
   }
 };
 
-window.addEventListener('scroll', handleScroll);
 
-  function handleScroll() {
-    // Jeśli użytkownik przewinął do końca strony
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-      onClickLoadMore();
-      // Tutaj można wykonać żądanie AJAX lub inny sposób ładowania nowych zawartości
-      // Na przykład:
-      // fetch('url-do-danych-nowej-zawartosci')
-      //   .then(response => response.json())
-      //   .then(data => {
+const handleScroll = () => {
+  // Jeśli użytkownik przewinął do końca strony
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    // Tutaj można wykonać żądanie AJAX lub inny sposób ładowania nowych zawartości
+    onClickLoadMore();
+    loadMoreBtn.style.display = 'none';
+    // Na przykład:
+    // fetch('url-do-danych-nowej-zawartosci')
+    //   .then(response => response.json())
+    //   .then(data => {
       //     // Przetwarzanie danych i dodawanie ich do istniejącego kontenera
       //   });
     }
   }
+  window.addEventListener('scroll', handleScroll);
 
   

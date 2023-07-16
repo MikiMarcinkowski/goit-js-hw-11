@@ -16,82 +16,77 @@ body {
   text-align: center;
 }
 input {
-  padding: 10px; /* Wielkość wewnętrznego marginesu dla elementu input */
-  border: 1px solid #ccc; /* Grubość i styl obramowania */
-  border-radius: 5px; /* Zaokrąglenie rogów */
-  font-size: 20px; /* Rozmiar czcionki */
-  /* width: 100%; */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 20px;
 }
 
 .search-btn {
-  padding: 10px 15px; /* Wielkość wewnętrznego marginesu dla przycisku */
-  border: none; /* Usunięcie obramowania */
-  border-radius: 5px; /* Zaokrąglenie rogów */
-  background-color: #007bff; /* Kolor tła przycisku */
-  color: #fff; /* Kolor tekstu */
-  font-size: px; /* Rozmiar czcionki */
-  cursor: pointer; /* Zmiana kursora na wskaźnik po najechaniu */
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 20px; 
+  cursor: pointer;
 }
 
 .search-btn:hover {
-  background-color: #0056b3; /* Kolor tła po najechaniu myszą */
+  background-color: #0056b3;
 }
 
 .search-btn:focus {
-  outline: none; /* Usunięcie domyślnego podświetlenia w momencie aktywacji przycisku */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Efekt cienia po aktywowaniu */
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 input:focus {
-  outline: none; /* Usunięcie domyślnego podświetlenia w momencie aktywacji elementu */
-  border-color: #007bff; /* Kolor obramowania po aktywowaniu */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Efekt cienia po aktywowaniu */
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* .gallery{
-  display: flex;
-  flex-wrap: wrap;
 
-
-} */
 
 .gallery {
+  
   display: flex;
   flex-wrap: wrap;
-
-  gap: 20px; /* Wielkość odstępu między elementami galerii */
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
 }
 
 .photo-card {
   position: relative;
-  border: 2px solid white; /* Grubość i styl obramowania */
-
-  height: auto; /* Zachowanie proporcji wysokości */
+  border: 2px solid white;
+  height: auto;
   margin-top: 50px;
-  margin-bottom: 25px;
+  margin-bottom: 50px;
 }
 
 .photo-card img {
-  width: 100%; /* Szerokość obrazka na 100% */
-  /* height: auto; Zachowanie proporcji wysokości */
+  width: 100%;
   height: auto;
-  object-fit: cover; /* Dopasowanie obrazka do kontenera, zachowując proporcje */
+  object-fit: cover;
 }
 
 .info {
   width: 100%;
-  font-size: 8px;
+  font-size: 16px;
   display: flex;
   gap: 10px;
-  /* align-items: center; */
   flex-direction: row;
-  position: absolute; /* Ustawienie pozycji absolutnej */
-  top: 100%; /* Odległość od dolnej krawędzi elementu nadrzędnego */
-  left: 0px; /* Odległość od lewej krawędzi elementu nadrzędnego */
-  background-color: rgba(0, 0, 0, 0.7); /* Kolor tła dla elementu info */
-  color: #fff; /* Kolor tekstu */
-  padding: 10px; /* Wielkość wewnętrznego marginesu dla elementu info */
+  justify-content: space-around;
+  position: absolute;
+  top: 100%;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 10px;
 }
+
 
 .info-item {
   display: flex;
@@ -102,12 +97,13 @@ input:focus {
 
 .load-more {
   margin-top: 100px;
-  padding: 10px 15px; /* Wielkość wewnętrznego marginesu dla przycisku */
-  border: none; /* Usunięcie obramowania */
-  border-radius: 5px; /* Zaokrąglenie rogów */
-  background-color: #007bff; /* Kolor tła przycisku */
-  color: #fff; /* Kolor tekstu */
-  font-size: px; /* Rozmiar czcionki */
-  cursor: pointer; /* Zmiana kursora na wskaźnik po najechaniu */
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: px;
+  cursor: pointer;
   margin-bottom: 50px;
 }
+
